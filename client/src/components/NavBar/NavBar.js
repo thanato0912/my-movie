@@ -13,13 +13,13 @@ export default class Navbar extends Component{
         <div className="collapse navbar-collapse">
           <ul className="navbar-nav mr-auto">
             <li className="navbar-item">
-              <Link to="/" className="nav-link">Exercise</Link>
+              <Link to="/latest" className="nav-link">Latest</Link>
             </li>
             <li className="navbar-item">
-              <Link to="/create" className="nav-link">Create Exercise Log</Link>
+              <Link to="/toprated" className="nav-link">Top-Rated</Link>
             </li>
             <li className="navbar-item">
-              <Link to="/user" className="nav-link">Create User</Link>
+              <Link to="/favorites" className="nav-link">My Favorite</Link>
             </li>
           </ul>
           <ul className="navbar-nav">
@@ -35,8 +35,3 @@ export default class Navbar extends Component{
     );
   }
 }
-
-/*
-
-
-*/
