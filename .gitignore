@@ -1,0 +1,7 @@
+*/node_modules/*
+/build
+
+.DS_Store
+
+dev.js
+prod.js
