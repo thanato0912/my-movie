@@ -2,17 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Typography, Row, Button } from 'antd';
 import GridCard from './Sections/GridCard';
 import MainImage from './Sections/MainImage';
-
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { movieAPIKey, movieURI, imageURL } from '../../config';
 const { Title } = Typography;
 
 function Home() {
   const [movies, setMovies] = useState([]);
+  const [isFetching, setFetching] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const endpoint = `${movieURI}movie/popular?api_key=${movieAPIKey}&language=en-US&page=`;
     fetchMovies(endpoint + currentPage);
+    setFetching(true);
   }, []);
 
   const fetchMovies = (path) => {
@@ -48,26 +50,27 @@ function Home() {
         </Title>
         <hr />
 
-        {/* Grid */}
-        <Row gutter={[16, 16]}>
-          {movies &&
-            movies.map((movie, index) => (
-              <React.Fragment key={index}>
-                <GridCard
-                  image={
-                    movie.poster_path && `${imageURL}w500${movie.poster_path}`
-                  }
-                  movieId={movie.id}
-                />
-              </React.Fragment>
-            ))}
-        </Row>
-
-        {/*Load more*/}
-        <br />
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button onClick={loadMore}>Load More</Button>
-        </div>
+        {/* Infinite Grid */}
+        <InfiniteScroll
+          dataLength={movies.length}
+          next={loadMore}
+          hasMore={true}
+          loader={<h4>Loading...</h4>}
+        >
+          <Row gutter={[16, 16]}>
+            {isFetching &&
+              movies.map((movie, index) => (
+                <React.Fragment key={index}>
+                  <GridCard
+                    image={
+                      movie.poster_path && `${imageURL}w500${movie.poster_path}`
+                    }
+                    movieId={movie.id}
+                  />
+                </React.Fragment>
+              ))}
+          </Row>
+        </InfiniteScroll>
       </div>
       <div></div>
     </div>
