@@ -1,5 +1,6 @@
 import React from 'react';
 import { Col } from 'antd';
+
 function GridCard(props) {
   if (props.actor) {
     return (
