@@ -13,7 +13,10 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: ['http://localhost:3000', 'http://your-production-website.com'],
+    origin: [
+      'http://localhost:3000',
+      'https://my-movie-by-sssaang.herokuapp.com',
+    ],
   })
 );
 app.use(express.json());
