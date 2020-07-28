@@ -40,9 +40,15 @@ exports.loginUser = (req, res) => {
         doc.createWebToken((err, userInfo) => {
           if (err) return res.status(400).send(err);
           else {
-            return res.cookie('x_auth', doc.token).status(200).json({
+            res.cookie('x_auth', userInfo.token, {
+              maxAge: 900000,
+              httpOnly: true,
+            });
+            return res.status(200).json({
               loginSuccess: true,
-              userData: userInfo,
+              userId: userInfo._id,
+              token: doc.token,
+              cookie: res.cookies,
             });
           }
         });
@@ -52,11 +58,14 @@ exports.loginUser = (req, res) => {
 };
 
 exports.logoutUser = (req, res) => {
-  User.findByToken(req.cookies.x_auth, (err, userData) => {
-    if (err) throw err;
+  User.findByToken(req.body.token, (err, userData) => {
+    if (err) {
+      console.log(req.body.token);
+      throw err;
+    }
     if (!userData) {
       return res.json({
-        isAuth: false,
+        loginSuccess: false,
         error: true,
       });
     } else {
@@ -64,10 +73,10 @@ exports.logoutUser = (req, res) => {
         { _id: userData._id },
         { token: '' },
         (err, doc) => {
-          if (err) return res.json({ success: false, err });
+          if (err) return res.json({ loginSuccess: false, err });
           else {
             return res.status(200).send({
-              sucess: true,
+              loginSuccess: true,
             });
           }
         }

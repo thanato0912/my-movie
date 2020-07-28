@@ -32,7 +32,7 @@ function MyFavorites() {
       .post('http://localhost:5000/favorites/removeFromFavorite', variable)
       .then((res) => {
         if (res.data.success) {
-          setFavorites(favorites.filter((el) => el.movieId != movieId));
+          setFavorites(favorites.filter((el) => el.movieId !== movieId));
         } else {
           alert('Fail to remove to favorite!');
         }

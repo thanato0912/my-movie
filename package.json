@@ -27,5 +27,13 @@
   "devDependencies": {
     "concurrently": "^5.2.0",
     "nodemon": "^2.0.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thanato0912/my-movie.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thanato0912/my-movie/issues"
+  },
+  "homepage": "https://github.com/thanato0912/my-movie#readme"
 }

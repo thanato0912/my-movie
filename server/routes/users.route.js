@@ -1,6 +1,15 @@
 const router = require('express').Router();
-const userController = require('../controllers/users.controller');
 const { check, validationResult } = require('express-validator');
+const userController = require('../controllers/users.controller');
+const { auth } = require('../middleware/auth');
+
+//Auth
+router.get('/auth', auth, (req, res) => {
+  res.status(200).json({
+    loginSuccess: true,
+    token: req.token,
+  });
+});
 
 //Registration
 router
@@ -40,7 +49,7 @@ router
   );
 
 //Logout
-router.route('/logout').get((req, res) => {
+router.route('/logout').post((req, res) => {
   return userController.logoutUser(req, res);
 });
 

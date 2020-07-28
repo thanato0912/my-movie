@@ -10,22 +10,32 @@ function Login() {
     const user = {
       email: email,
       password: password,
+      withCredentials: true,
     };
-    axios.post('http://localhost:5000/users/login', user).then(
-      (res) => {
-        alert('Login Sucess!');
-        window.location = '/';
-      },
-      (error) => {
-        console.log(error.response);
-        let errors = error.response.data.errors;
-        let msg = '';
-        for (var err of errors) {
-          msg += err.msg + '\n';
+
+    axios
+      .post('http://localhost:5000/users/login', user, {
+        withCredentials: true,
+        mode: 'cors',
+      })
+      .then(
+        (res) => {
+          //alert(JSON.stringify(res.data));
+          window.localStorage.setItem('loginSuccess', true);
+          window.localStorage.setItem('userId', res.data.userId);
+          window.localStorage.setItem('token', res.data.token);
+          window.location = '/';
+        },
+        (error) => {
+          //alert(error);
+          let errors = error.response.data.errors;
+          let msg = '';
+          for (var err of errors) {
+            msg += err.msg + '\n';
+          }
+          alert(msg);
         }
-        alert(msg);
-      }
-    );
+      );
   };
 
   const div_style = {
@@ -39,7 +49,7 @@ function Login() {
       <h3 style={{ textAlign: 'center' }}>Login Page</h3>
       <form>
         <div className='form-group'>
-          <lable>Email: </lable>
+          <label>Email: </label>
           <input
             type='text'
             className='form-control'
@@ -49,7 +59,7 @@ function Login() {
           />
         </div>
         <div className='form-group'>
-          <lable>Password: </lable>
+          <label>Password: </label>
           <input
             type='password'
             className='form-control'

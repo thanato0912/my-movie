@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Typography, Row, Button } from 'antd';
+import { Typography, Row } from 'antd';
 import GridCard from './Sections/GridCard';
 import MainImage from './Sections/MainImage';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -72,7 +72,6 @@ function Home() {
           </Row>
         </InfiniteScroll>
       </div>
-      <div></div>
     </div>
   );
 }
