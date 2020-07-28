@@ -15,29 +15,48 @@ function Favorite(props) {
   const [favorited, setFavorite] = useState(false);
 
   const onClickFavorite = () => {
-    if (!favorited) {
-      axios
-        .post('http://localhost:5000/favorites/addToFavorite', variable)
-        .then((res) => {
-          if (res.data.success) {
-            setFavoriteNumber(favoriteNumber + 1);
-            setFavorite(!favorited);
+    axios
+      .get('http://localhost:5000/users/auth', {
+        withCredentials: true,
+        mode: 'cors',
+      })
+      .then(
+        (res) => {
+          if (!res.data.loginSuccess) {
+            alert('Please log in first!');
           } else {
-            //alert('Fail to add to favorite!');
+            if (!favorited) {
+              axios
+                .post('http://localhost:5000/favorites/addToFavorite', variable)
+                .then((res) => {
+                  if (res.data.success) {
+                    setFavoriteNumber(favoriteNumber + 1);
+                    setFavorite(!favorited);
+                  } else {
+                    //alert('Fail to add to favorite!');
+                  }
+                });
+            } else {
+              axios
+                .post(
+                  'http://localhost:5000/favorites/removeFromFavorite',
+                  variable
+                )
+                .then((res) => {
+                  if (res.data.success) {
+                    setFavoriteNumber(favoriteNumber - 1);
+                    setFavorite(!favorited);
+                  } else {
+                    //alert('Fail to remove to favorite!');
+                  }
+                });
+            }
           }
-        });
-    } else {
-      axios
-        .post('http://localhost:5000/favorites/removeFromFavorite', variable)
-        .then((res) => {
-          if (res.data.success) {
-            setFavoriteNumber(favoriteNumber - 1);
-            setFavorite(!favorited);
-          } else {
-            //alert('Fail to remove to favorite!');
-          }
-        });
-    }
+        },
+        (err) => {
+          alert(err);
+        }
+      );
   };
 
   useEffect(() => {

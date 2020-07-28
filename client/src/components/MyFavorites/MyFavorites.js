@@ -13,6 +13,23 @@ function MyFavorites() {
 
   useEffect(() => {
     axios
+      .get('http://localhost:5000/users/auth', {
+        withCredentials: true,
+        mode: 'cors',
+      })
+      .then(
+        (res) => {
+          if (!res.data.loginSuccess) {
+            alert('Please log in first!');
+            window.location = '/';
+          }
+        },
+        (err) => {
+          alert(err);
+          window.location = '/';
+        }
+      );
+    axios
       .post('http://localhost:5000/favorites/getFavoriteMovies', variables)
       .then((res) => {
         if (res.data.success) {
