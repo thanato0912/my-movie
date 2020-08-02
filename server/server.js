@@ -23,7 +23,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/users', userRouter);
 app.use('/favorites', favoriteRouter);
-
+if (process.env.NODE_ENV === 'production')
+  app.use(express.static(path.join(__dirname, 'build')));
 mongoose
   .connect(config.mongoURI, {
     useNewUrlParser: true,
