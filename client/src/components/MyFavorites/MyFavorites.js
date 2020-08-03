@@ -74,9 +74,7 @@ function MyFavorites() {
         </Popover>
         <td>{movie.movieRunTime}</td>
         <td>
-          <Button onClick={() => onClickRemove(movie.movieId)}>
-            remove {index}
-          </Button>
+          <Button onClick={() => onClickRemove(movie.movieId)}>remove</Button>
         </td>
       </tr>
     );

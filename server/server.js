@@ -5,8 +5,8 @@ const cors = require('cors');
 const app = express();
 const userRouter = require('./routes/users.route');
 const favoriteRouter = require('./routes/favorites.route');
-const config = require('./config/key');
-
+//const config = require('./config/key');
+require('dotenv').config();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
@@ -24,9 +24,9 @@ app.use(cookieParser());
 app.use('/users', userRouter);
 app.use('/favorites', favoriteRouter);
 if (process.env.NODE_ENV === 'production')
-  app.use(express.static('client/build'));
+  app.use(express.static('/client/build'));
 mongoose
-  .connect(config.mongoURI, {
+  .connect(process.env.mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
