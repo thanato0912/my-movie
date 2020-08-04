@@ -21,9 +21,6 @@ function Login() {
       })
       .then(
         (res) => {
-          window.localStorage.setItem('loginSuccess', true);
-          window.localStorage.setItem('userId', res.data.userId);
-          window.localStorage.setItem('token', res.data.token);
           window.location = '/';
         },
         (error) => {
