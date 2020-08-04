@@ -24,7 +24,7 @@ app.use('/users', userRouter);
 app.use('/favorites', favoriteRouter);
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production')
-  app.use(express.static('/client/build'));
+  app.use(express.static(path.join(__dirname, '../client/build')));
 mongoose
   .connect(process.env.mongoURI, {
     useNewUrlParser: true,
