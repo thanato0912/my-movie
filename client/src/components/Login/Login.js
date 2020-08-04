@@ -15,7 +15,7 @@ function Login() {
     };
 
     axios
-      .post(`users/login`, user, {
+      .post('/temp/users/login', user, {
         withCredentials: true,
         mode: 'cors',
       })
