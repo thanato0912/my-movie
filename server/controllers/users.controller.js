@@ -25,7 +25,6 @@ exports.loginUser = (req, res) => {
   User.findOne({ email: req.body.email }, (err, doc) => {
     if (err) return res.json({ error: err });
     if (!doc) return res.json({ error: 'no user found' });
-    console.log(err + ' ' + doc);
     doc.validatePassword(req.body.password, (err, isMatch) => {
       if (err) return res.json({ error: err });
       //password not matching
@@ -40,6 +39,7 @@ exports.loginUser = (req, res) => {
       } else {
         //genenerating webtoken that is used to keep the user signed in
         doc.createWebToken((err, userInfo) => {
+          console.log('user found');
           if (err) return res.status(400).send(err);
           else {
             res.cookie('x_auth', userInfo.token, {
