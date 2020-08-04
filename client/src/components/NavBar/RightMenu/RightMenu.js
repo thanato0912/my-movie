@@ -13,16 +13,18 @@ function RightMenu(props) {
         mode: 'cors',
       })
       .then(
-        console.log(res);
         (res) => {
           if (res.data.loginSuccess) {
+            console.log(res.data);
             setLogin(true);
             setToken(res.data.token);
           } else {
+            console.log(res.data);
             setLogin(false);
           }
         },
         (err) => {
+          console.log(err);
           setLogin(false);
         }
       );
