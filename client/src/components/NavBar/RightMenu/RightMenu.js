@@ -13,6 +13,7 @@ function RightMenu(props) {
         mode: 'cors',
       })
       .then(
+        console.log(res);
         (res) => {
           if (res.data.loginSuccess) {
             setLogin(true);
