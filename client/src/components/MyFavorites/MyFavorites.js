@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Button } from 'antd';
 import { Popover } from 'antd';
 import axios from 'axios';
-import { imageURL, BASE_URL } from '../../config';
+import { imageURL } from '../../config';
 import './favorite.css';
 
 const { Title } = Typography;
@@ -13,7 +13,7 @@ function MyFavorites() {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}users/auth`, {
+      .get(`users/auth`, {
         withCredentials: true,
         mode: 'cors',
       })
@@ -29,15 +29,13 @@ function MyFavorites() {
           window.location = '/';
         }
       );
-    axios
-      .post(`${BASE_URL}favorites/getFavoriteMovies`, variables)
-      .then((res) => {
-        if (res.data.success) {
-          setFavorites(res.data.favorites);
-        } else {
-          alert('failed to retrieve favorite movies!');
-        }
-      });
+    axios.post(`favorites/getFavoriteMovies`, variables).then((res) => {
+      if (res.data.success) {
+        setFavorites(res.data.favorites);
+      } else {
+        alert('failed to retrieve favorite movies!');
+      }
+    });
   }, []);
 
   const onClickRemove = (movieId, i) => {
@@ -45,15 +43,13 @@ function MyFavorites() {
       movieId: movieId,
       userFrom: localStorage.getItem('userId'),
     };
-    axios
-      .post(`${BASE_URL}favorites/removeFromFavorite`, variable)
-      .then((res) => {
-        if (res.data.success) {
-          setFavorites(favorites.filter((el) => el.movieId !== movieId));
-        } else {
-          alert('Fail to remove to favorite!');
-        }
-      });
+    axios.post(`favorites/removeFromFavorite`, variable).then((res) => {
+      if (res.data.success) {
+        setFavorites(favorites.filter((el) => el.movieId !== movieId));
+      } else {
+        alert('Fail to remove to favorite!');
+      }
+    });
   };
 
   const renderTableBody = favorites.map((movie, index) => {

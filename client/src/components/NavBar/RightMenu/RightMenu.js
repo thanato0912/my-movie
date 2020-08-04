@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { BASE_URL } from '../../../config';
 
 function RightMenu(props) {
   const [isLogin, setLogin] = useState(false);
@@ -9,7 +8,7 @@ function RightMenu(props) {
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}users/auth`, {
+      .get(`users/auth`, {
         withCredentials: true,
         mode: 'cors',
       })
@@ -31,7 +30,7 @@ function RightMenu(props) {
   const logoutHandler = () => {
     axios
       .post(
-        `${BASE_URL}users/logout`,
+        `users/logout`,
         { token: token },
         {
           withCredentials: true,
