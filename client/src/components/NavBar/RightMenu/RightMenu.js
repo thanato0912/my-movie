@@ -14,7 +14,7 @@ function RightMenu(props) {
       })
       .then(
         (res) => {
-          console.log(JSON.stringify(res.data));
+          console.log(JSON.stringify(res));
           if (res.data.loginSuccess) {
             setLogin(true);
             setToken(res.data.token);
