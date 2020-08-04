@@ -12,6 +12,7 @@ let auth = (req, res, next) => {
       return res.json({
         loginSuccess: false,
         error: true,
+        req: req,
       });
     }
 
