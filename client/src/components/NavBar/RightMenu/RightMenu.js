@@ -19,7 +19,7 @@ function RightMenu(props) {
             setLogin(true);
             setToken(res.data.token);
           } else {
-            console.log(JSON.stringify(res.data));
+            console.log(JSON.stringify(res));
             setLogin(false);
           }
         },
