@@ -58,8 +58,6 @@ function Favorite(props) {
     axios.get(`favorites/favoriteNumber`, variable).then((res) => {
       if (res.data) {
         setFavoriteNumber(res.data.FavoriteNumber);
-      } else {
-        //console.log();
       }
     });
 

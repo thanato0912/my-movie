@@ -53,7 +53,6 @@ function MyFavorites() {
   };
 
   const renderTableBody = favorites.map((movie, index) => {
-    console.log(index);
     const content = (
       <div>
         {movie.moviePost ? (

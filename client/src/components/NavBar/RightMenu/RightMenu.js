@@ -48,6 +48,7 @@ function RightMenu(props) {
   };
 
   if (!isLogin) {
+    console.log('not login');
     return (
       <React.Fragment>
         <li className='navbar-item' style={props.mystyle}>
@@ -63,6 +64,7 @@ function RightMenu(props) {
       </React.Fragment>
     );
   } else {
+    console.log('login');
     return (
       <React.Fragment>
         <li

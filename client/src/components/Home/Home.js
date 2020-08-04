@@ -26,7 +26,6 @@ function Home() {
   };
 
   const loadMore = () => {
-    console.log(process.env.NODE_ENV);
     const endpoint = `${movieURI}movie/popular?api_key=${movieAPIKey}&language=en-US&page=`;
     fetchMovies(endpoint + (currentPage + 1));
     setCurrentPage(currentPage + 1);

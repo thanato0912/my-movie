@@ -15,7 +15,6 @@ function MovieDetails(props) {
     fetch(`${movieURI}movie/${movieId}?api_key=${movieAPIKey}&language=en-US`)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         setMovie(res);
         fetch(
           `${movieURI}movie/${movieId}/credits?api_key=${movieAPIKey}&language=en-US`
