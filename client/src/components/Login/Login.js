@@ -15,7 +15,7 @@ function Login() {
     };
 
     axios
-      .post(`${BASE_URL}users/login`, user, {
+      .post(`users/login`, user, {
         withCredentials: true,
         mode: 'cors',
       })
