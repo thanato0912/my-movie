@@ -19,7 +19,6 @@ function Register() {
     };
     axios.post('users/register', user).then(
       (res) => {
-        //console.log()
         if (res.data.errors !== undefined) {
           alert(res.data.errors[0].msg);
         } else {
