@@ -21,6 +21,8 @@ exports.createUser = (req, res) => {
 
 exports.loginUser = (req, res) => {
   //look for the email provided in the db
+
+  console.log(req.body);
   User.findOne({ email: req.body.email }, (err, doc) => {
     if (err) return res.json({ error: err });
     if (!doc) return res.json({ error: 'no user found' });
