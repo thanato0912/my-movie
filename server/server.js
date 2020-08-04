@@ -14,10 +14,7 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: [
-      'http://localhost:3000',
-      'https://my-movie-by-sssaang.herokuapp.com',
-    ],
+    origin: ['http://localhost:3000', 'http://52.79.61.9:5000'],
   })
 );
 app.use(cookieParser());

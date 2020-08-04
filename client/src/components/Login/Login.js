@@ -21,14 +21,12 @@ function Login() {
       })
       .then(
         (res) => {
-          //alert(JSON.stringify(res.data));
           window.localStorage.setItem('loginSuccess', true);
           window.localStorage.setItem('userId', res.data.userId);
           window.localStorage.setItem('token', res.data.token);
           window.location = '/';
         },
         (error) => {
-          //alert(error);
           let errors = error.response.data.errors;
           let msg = '';
           for (var err of errors) {
