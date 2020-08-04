@@ -1,6 +1,7 @@
 import { Button } from 'antd';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { BASE_URL } from '../../config';
 
 function Favorite(props) {
   const variable = {
@@ -16,7 +17,7 @@ function Favorite(props) {
 
   const onClickFavorite = () => {
     axios
-      .get('http://localhost:5000/users/auth', {
+      .get(`${BASE_URL}users/auth`, {
         withCredentials: true,
         mode: 'cors',
       })
@@ -27,7 +28,7 @@ function Favorite(props) {
           } else {
             if (!favorited) {
               axios
-                .post('http://localhost:5000/favorites/addToFavorite', variable)
+                .post(`${BASE_URL}favorites/addToFavorite`, variable)
                 .then((res) => {
                   if (res.data.success) {
                     setFavoriteNumber(favoriteNumber + 1);
@@ -38,10 +39,7 @@ function Favorite(props) {
                 });
             } else {
               axios
-                .post(
-                  'http://localhost:5000/favorites/removeFromFavorite',
-                  variable
-                )
+                .post(`${BASE_URL}favorites/removeFromFavorite`, variable)
                 .then((res) => {
                   if (res.data.success) {
                     setFavoriteNumber(favoriteNumber - 1);
@@ -60,25 +58,21 @@ function Favorite(props) {
   };
 
   useEffect(() => {
-    axios
-      .get('http://localhost:5000/favorites/favoriteNumber', variable)
-      .then((res) => {
-        if (res.data) {
-          setFavoriteNumber(res.data.FavoriteNumber);
-        } else {
-          //console.log();
-        }
-      });
+    axios.get(`${BASE_URL}favorites/favoriteNumber`, variable).then((res) => {
+      if (res.data) {
+        setFavoriteNumber(res.data.FavoriteNumber);
+      } else {
+        //console.log();
+      }
+    });
 
-    axios
-      .get('http://localhost:5000/favorites/favorited', variable)
-      .then((res) => {
-        if (res.data) {
-          setFavorite(res.data.favorited);
-        } else {
-          //alert('error!');
-        }
-      });
+    axios.get(`${BASE_URL}favorites/favorited`, variable).then((res) => {
+      if (res.data) {
+        setFavorite(res.data.favorited);
+      } else {
+        //alert('error!');
+      }
+    });
   }, []);
   return (
     <Button onClick={onClickFavorite}>

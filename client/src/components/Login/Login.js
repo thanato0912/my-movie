@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { BASE_URL } from '../../config';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -14,7 +15,7 @@ function Login() {
     };
 
     axios
-      .post('http://localhost:5000/users/login', user, {
+      .post(`${BASE_URL}users/login`, user, {
         withCredentials: true,
         mode: 'cors',
       })

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Typography, Button } from 'antd';
 import { Popover } from 'antd';
 import axios from 'axios';
-import { imageURL } from '../../config';
+import { imageURL, BASE_URL } from '../../config';
 import './favorite.css';
 
 const { Title } = Typography;
@@ -13,7 +13,7 @@ function MyFavorites() {
 
   useEffect(() => {
     axios
-      .get('http://localhost:5000/users/auth', {
+      .get(`${BASE_URL}users/auth`, {
         withCredentials: true,
         mode: 'cors',
       })
@@ -30,7 +30,7 @@ function MyFavorites() {
         }
       );
     axios
-      .post('http://localhost:5000/favorites/getFavoriteMovies', variables)
+      .post(`${BASE_URL}favorites/getFavoriteMovies`, variables)
       .then((res) => {
         if (res.data.success) {
           setFavorites(res.data.favorites);
@@ -46,7 +46,7 @@ function MyFavorites() {
       userFrom: localStorage.getItem('userId'),
     };
     axios
-      .post('http://localhost:5000/favorites/removeFromFavorite', variable)
+      .post(`${BASE_URL}favorites/removeFromFavorite`, variable)
       .then((res) => {
         if (res.data.success) {
           setFavorites(favorites.filter((el) => el.movieId !== movieId));

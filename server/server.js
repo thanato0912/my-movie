@@ -21,11 +21,11 @@ app.use(
 );
 app.use(express.json());
 app.use(cookieParser());
+app.get('/', (req, res) => res.json({ hi: 'hi' }));
 app.use('/users', userRouter);
 app.use('/favorites', favoriteRouter);
 if (process.env.NODE_ENV === 'production')
   app.use(express.static('/client/build'));
-console.log(process.env.NODE_ENV);
 mongoose
   .connect(process.env.mongoURI, {
     useNewUrlParser: true,
