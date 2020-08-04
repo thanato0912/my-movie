@@ -40,6 +40,7 @@ exports.loginUser = (req, res) => {
       } else {
         //genenerating webtoken that is used to keep the user signed in
         doc.createWebToken((err, userInfo) => {
+          console.log('user found');
           if (err) return res.status(400).send(err);
           else {
             res.cookie('x_auth', userInfo.token, {
