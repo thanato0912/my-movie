@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { BASE_URL } from '../../config';
+import { BASE_URL } from '../../../config';
 
 function RightMenu(props) {
   const [isLogin, setLogin] = useState(false);

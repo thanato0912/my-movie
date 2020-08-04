@@ -19,7 +19,6 @@ app.use(
     ],
   })
 );
-app.use(express.json());
 app.use(cookieParser());
 app.get('/', (req, res) => res.json({ hi: 'hi' }));
 app.use('/users', userRouter);

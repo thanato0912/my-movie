@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { BASE_URL } from '../../config';
+import { BASE_URL } from '../../../config';
 
 function Favorite(props) {
   const variable = {
