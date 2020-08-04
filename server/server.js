@@ -20,7 +20,6 @@ app.use(
 app.use(cookieParser());
 app.use('/users', userRouter);
 app.use('/favorites', favoriteRouter);
-console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
   app.get('*', (req, res) => {
