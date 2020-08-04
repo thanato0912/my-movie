@@ -7,6 +7,7 @@ function RightMenu(props) {
   const [token, setToken] = useState('');
 
   useEffect(() => {
+    console.log('log');
     axios
       .get(`users/auth`, {
         withCredentials: true,
