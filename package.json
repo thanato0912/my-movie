@@ -25,6 +25,7 @@
     "express-validator": "^6.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.25",
+    "path": "^0.12.7",
     "react-infinite-scroll-component": "^5.0.5",
     "saslprep": "^1.0.3",
     "supports-color": "^7.1.0"
