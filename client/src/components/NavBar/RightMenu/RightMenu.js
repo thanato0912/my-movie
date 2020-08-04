@@ -15,16 +15,16 @@ function RightMenu(props) {
       .then(
         (res) => {
           if (res.data.loginSuccess) {
-            alert(res.data);
+            console.log(JSON.stringify(res.data));
             setLogin(true);
             setToken(res.data.token);
           } else {
-            alert(res.data);
+            console.log(JSON.stringify(res.data));
             setLogin(false);
           }
         },
         (err) => {
-          alert(err);
+          alert(JSON.stringify(err));
           setLogin(false);
         }
       );
