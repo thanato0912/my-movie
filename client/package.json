@@ -1,5 +1,6 @@
 {
   "name": "client",
+  "homepage": "http://52.79.61.9:5000/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
