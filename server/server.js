@@ -25,6 +25,19 @@ if (process.env.NODE_ENV === 'production') {
   app.get('/', (req, res) => {
     res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
   });
+
+  app.use((req, res, next) => {
+    const error = new Error('Not Found'); //Error object
+    error.status = 404;
+
+    //res.render('./404'); by default in express applications you would render a 404 page
+
+    res
+      .status(200)
+      .sendFile(path.join(__dirname, '../client/build/index.html'));
+
+    next(error);
+  });
 }
 
 mongoose
