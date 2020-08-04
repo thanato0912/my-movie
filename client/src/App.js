@@ -17,11 +17,11 @@ function App() {
     <Router>
       <NavBar />
       <Route exact path='/' component={Home} />
-      <Route exact path='/latest' component={Latest} />
+      <Route path='/latest' component={Latest} />
       <Route path='/movie/:movieId' component={MovieDetails} />
-      <Route exact path='/favorites' component={MyFavorites} />
-      <Route exact path='/login' component={Login} />
-      <Route exact path='/register' component={Register} />
+      <Route path='/favorites' component={MyFavorites} />
+      <Route path='/login' component={Login} />
+      <Route path='/register' component={Register} />
       <Footer style={{ textAlign: 'center' }}>
         My-Movie ©2020 Created by SSSAANG
       </Footer>
