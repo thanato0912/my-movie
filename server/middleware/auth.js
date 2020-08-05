@@ -7,15 +7,9 @@ let auth = (req, res, next) => {
     if (err) {
       throw err;
     }
-    if (!user) {
-      return res.json({
-        loginSuccess: false,
-        error: true,
-        req: req,
-      });
-    }
-
+    req.loginSuccess = user !== null;
     req.token = token;
+    console.log(req.loginSuccess + ' ' + req.token);
     next();
   });
 };

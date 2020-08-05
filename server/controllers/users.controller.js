@@ -8,15 +8,19 @@ exports.createUser = (req, res) => {
       userInfo.createWebToken((err, userInfo) => {
         if (err) return res.status(400).send(err);
         else {
-          return res.cookie('x_auth', userInfo.token).status(200).json({
+          res.cookie('x_auth', userInfo.token);
+          return res.status(200).json({
             loginSuccess: true,
             userData: userInfo,
+            token: userInfo.token,
+            cookie: res.cookies,
           });
         }
       });
-      return res.json({ login: 'success' });
     })
-    .catch((err) => res.json({ error: err }));
+    .catch((err) => {
+      res.json({ loginSuccess: false, message: 'Email already exists' });
+    });
 };
 
 exports.loginUser = (req, res) => {
@@ -30,7 +34,7 @@ exports.loginUser = (req, res) => {
       //password not matching
       if (!isMatch) {
         return res.json({
-          loginSucess: false,
+          loginSuccess: false,
           message: 'password is incorrect',
           err,
         });
@@ -61,7 +65,6 @@ exports.loginUser = (req, res) => {
 exports.logoutUser = (req, res) => {
   User.findByToken(req.body.token, (err, userData) => {
     if (err) {
-      console.log(req.body.token);
       throw err;
     }
     if (!userData) {

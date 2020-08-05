@@ -6,7 +6,7 @@ const { auth } = require('../middleware/auth');
 //Auth
 router.get('/auth', auth, (req, res) => {
   res.status(200).json({
-    loginSuccess: true,
+    loginSuccess: req.loginSuccess,
     token: req.token,
   });
 });

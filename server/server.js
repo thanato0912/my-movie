@@ -6,7 +6,6 @@ const path = require('path');
 const app = express();
 const userRouter = require('./routes/users.route');
 const favoriteRouter = require('./routes/favorites.route');
-//const config = require('./config/key');
 require('dotenv').config();
 const port = process.env.PORT || 5000;
 
