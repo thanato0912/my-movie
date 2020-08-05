@@ -9,7 +9,6 @@ let auth = (req, res, next) => {
     }
     req.loginSuccess = user !== null;
     req.token = token;
-    console.log(req.loginSuccess + ' ' + req.token);
     next();
   });
 };
