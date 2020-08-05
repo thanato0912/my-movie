@@ -18,6 +18,8 @@ app.use(
   })
 );
 app.use(cookieParser());
+app.use('/users', userRouter);
+app.use('/favorites', favoriteRouter);
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
@@ -25,9 +27,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.resolve(__dirname, '../client/build', 'index.html'));
   });
 }
-
-app.use('/users', userRouter);
-app.use('/favorites', favoriteRouter);
 
 mongoose
   .connect(process.env.mongoURI, {
