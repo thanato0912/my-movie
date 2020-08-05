@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { imageURL, BASE_URL } from '../../config';
 
 function Register() {
   const [firstName, setFirstName] = useState('');
@@ -17,24 +18,25 @@ function Register() {
       email: email,
       password: password,
     };
-    axios.post('users/register', user).then(
-      (res) => {
-        if (res.data.errors !== undefined) {
-          alert(res.data.errors[0].msg);
-        } else {
-          window.location = '/';
-          alert('Login Sucess!');
+    axios
+      .post(`${BASE_URL}users/register`, user, {
+        withCredentials: true,
+        mode: 'cors',
+      })
+      .then(
+        (res) => {
+          if (res.data.errors !== undefined) {
+            alert(res.data.errors[0].msg);
+          } else {
+            if (!res.data.loginSuccess) {
+              alert(JSON.stringify(res.data.message));
+            } else window.location = '/';
+          }
+        },
+        (error) => {
+          alert(JSON.stringify(error));
         }
-      },
-      (error) => {
-        let errors = error.response.data.errors;
-        let msg = '';
-        for (var err of errors) {
-          msg += err.msg + '\n';
-        }
-        alert(msg);
-      }
-    );
+      );
   };
 
   const div_style = {

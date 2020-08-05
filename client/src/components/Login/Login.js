@@ -15,13 +15,15 @@ function Login() {
     };
 
     axios
-      .post('/users/login', user, {
+      .post(`${BASE_URL}users/login`, user, {
         withCredentials: true,
         mode: 'cors',
       })
       .then(
         (res) => {
-          window.location = '/';
+          if (!res.data.loginSuccess) {
+            alert(res.data.message);
+          } else window.location = '/';
         },
         (error) => {
           let errors = error.response.data.errors;

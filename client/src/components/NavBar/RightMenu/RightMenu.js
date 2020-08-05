@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import { BASE_URL } from '../../../config';
 function RightMenu(props) {
   const [isLogin, setLogin] = useState(false);
   const [token, setToken] = useState('');
 
   useEffect(() => {
     axios
-      .get(`users/auth`, {
+      .get(`${BASE_URL}users/auth`, {
         withCredentials: true,
         mode: 'cors',
       })
       .then(
         (res) => {
-          console.log(JSON.stringify(res));
           if (res.data.loginSuccess) {
             setLogin(true);
             setToken(res.data.token);
           } else {
             setLogin(false);
+            setToken('');
           }
         },
         (err) => {
-          alert(JSON.stringify(err));
+          console.log(JSON.stringify(err) + ' ' + `${BASE_URL}users/auth`);
           setLogin(false);
         }
       );
@@ -32,7 +32,7 @@ function RightMenu(props) {
   const logoutHandler = () => {
     axios
       .post(
-        `users/logout`,
+        `${BASE_URL}users/logout`,
         { token: token },
         {
           withCredentials: true,
@@ -49,7 +49,7 @@ function RightMenu(props) {
       );
   };
 
-  if (!isLogin) {
+  if (!isLogin || token === '') {
     return (
       <React.Fragment>
         <li className='navbar-item' style={props.mystyle}>
