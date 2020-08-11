@@ -12,6 +12,7 @@ function MainImage(props) {
         backgroundPosition: 'center, center',
         width: '100%',
         position: 'relative',
+        backgroundRepeat: 'no-repeat',
       }}
     >
       <div

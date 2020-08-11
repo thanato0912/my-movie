@@ -31,7 +31,7 @@ function MovieDetails(props) {
   return (
     <div>
       {/*Head*/}
-      <div style={{ width: '100%' }}>
+      <div style={{ width: '100%', margin: 0 }}>
         {movie && (
           <MainImage
             image={`${imageURL}w1280${movie.backdrop_path}`}

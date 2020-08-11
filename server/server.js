@@ -16,6 +16,7 @@ app.use(
     origin: ['http://localhost:3000'],
   })
 );
+
 app.use(cookieParser());
 app.use('/users', userRouter);
 app.use('/favorites', favoriteRouter);
