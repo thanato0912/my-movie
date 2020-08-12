@@ -2,6 +2,7 @@ import React from 'react';
 import { Col } from 'antd';
 
 function GridCard(props) {
+  //in case showing movie details
   if (props.actor) {
     return (
       <Col key={props.key} lg={6} md={8} xs={24}>
@@ -15,6 +16,7 @@ function GridCard(props) {
       </Col>
     );
   } else {
+    //in case showing movies
     return (
       <Col key={props.key} lg={6} md={8} xs={24}>
         <div style={{ position: 'relative' }}>

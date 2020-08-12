@@ -1,10 +1,13 @@
 var { User } = require('../models/users.model');
 
+//Creates user
 exports.createUser = (req, res) => {
   var newUser = new User(req.body);
   newUser
     .save()
     .then((userInfo) => {
+      //if successfully create the user account
+      //then create web token to log the user in
       userInfo.createWebToken((err, userInfo) => {
         if (err) return res.status(400).send(err);
         else {
@@ -23,6 +26,7 @@ exports.createUser = (req, res) => {
     });
 };
 
+//Sign in user
 exports.loginUser = (req, res) => {
   //look for the email provided in the db
 
@@ -62,6 +66,7 @@ exports.loginUser = (req, res) => {
   });
 };
 
+//Sign out the user by removing token
 exports.logoutUser = (req, res) => {
   User.findByToken(req.body.token, (err, userData) => {
     if (err) {

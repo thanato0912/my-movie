@@ -10,6 +10,8 @@ require('dotenv').config();
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
+
+//cors control for dev
 app.use(
   cors({
     credentials: true,
@@ -21,6 +23,7 @@ app.use(cookieParser());
 app.use('/users', userRouter);
 app.use('/favorites', favoriteRouter);
 
+//gets static files when production
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, '../client/build')));
   app.get('*', (req, res) => {
@@ -28,6 +31,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+//connecting mongoose with options to elminate errors
 mongoose
   .connect(process.env.mongoURI, {
     useNewUrlParser: true,

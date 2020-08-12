@@ -17,6 +17,7 @@ function Home() {
     setFetching(true);
   }, []);
 
+  //fetch API request and retrieves && assign them in the state
   const fetchMovies = (path) => {
     fetch(path)
       .then((res) => res.json())
@@ -25,6 +26,7 @@ function Home() {
       });
   };
 
+  //hits when user scroll down to the bottom
   const loadMore = () => {
     const endpoint = `${movieURI}movie/popular?api_key=${movieAPIKey}&language=en-US&page=`;
     fetchMovies(endpoint + (currentPage + 1));

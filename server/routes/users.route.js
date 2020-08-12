@@ -41,6 +41,7 @@ router
     ],
     (req, res) => {
       const errors = validationResult(req);
+      //send errors if form not verified
       if (!errors.isEmpty()) {
         return res.status(400).send({ errors: errors.array() });
       }

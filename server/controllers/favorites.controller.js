@@ -1,4 +1,6 @@
 var { Favorite } = require('../models/favorites.model');
+
+//retrieve the number of favorite of a movie
 exports.numOfFavorites = (req, res) => {
   Favorite.find({ movieId: req.body.movieId }).exec((err, favorite) => {
     if (err) res.status(400).send(err);
@@ -6,6 +8,7 @@ exports.numOfFavorites = (req, res) => {
   });
 };
 
+//check if the user add the movie to his/her favorite
 exports.isFavorite = (req, res) => {
   Favorite.find({
     movieId: req.body.movieId,
@@ -18,6 +21,7 @@ exports.isFavorite = (req, res) => {
   });
 };
 
+//add the movie to user's favorite list
 exports.addFavorite = (req, res) => {
   const favorite = new Favorite(req.body);
   favorite.save((err, doc) => {
@@ -26,6 +30,7 @@ exports.addFavorite = (req, res) => {
   });
 };
 
+//remove the movie from user's favorite list
 exports.removeFavorite = (req, res) => {
   Favorite.findOneAndDelete({
     movieId: req.body.movieId,
@@ -36,6 +41,7 @@ exports.removeFavorite = (req, res) => {
   });
 };
 
+//retrive user's favorite list
 exports.getFavorites = (req, res) => {
   Favorite.find({ userFrom: req.body.userFrom }).exec((err, favorites) => {
     if (err) return res.status(400).json({ success: false });
